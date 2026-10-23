@@ -1,0 +1,77 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isAuth() {
+      return request.auth != null;
+    }
+    
+    function isSuperAdmin() {
+      return isAuth() && (request.auth.uid == 'YNxF7YAv0XYqkZHgaX6mtxAbG103' || 
+             (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+              get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'super_admin'));
+    }
+    
+    function isAdmin() {
+      return isSuperAdmin() || 
+             (isAuth() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+              get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin');
+    }
+
+    match /users/{userId} {
+      allow read: if isAuth();
+      allow create, update: if isAuth() && (request.auth.uid == userId || isSuperAdmin() || isAdmin());
+      allow delete: if isSuperAdmin();
+    }
+
+    match /tournaments/{tournamentId} {
+      allow read: if isAuth();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /registrations/{registrationId} {
+      allow read: if isAuth() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuth() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAdmin() || (isAuth() && resource.data.userId == request.auth.uid && request.resource.data.userId == request.auth.uid);
+      allow delete: if isSuperAdmin();
+    }
+
+    match /matches/{matchId} {
+      allow read: if isAuth();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /standings/{standingId} {
+      allow read: if isAuth();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /scorers/{scorerId} {
+      allow read: if isAuth();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /payments/{paymentId} {
+      allow read: if isAuth() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isAuth() && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
+
+    match /notices/{noticeId} {
+      allow read: if isAuth();
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /notifications/{notificationId} {
+      allow read: if isAuth() && (resource.data.userId == request.auth.uid || resource.data.userId == 'all' || isAdmin());
+      allow create: if isAuth();
+      allow update: if isAuth() && (resource.data.userId == request.auth.uid || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    match /app_config/{configId} {
+      allow read: if isAuth();
+      allow write: if isAdmin();
+    }
+  }
+}

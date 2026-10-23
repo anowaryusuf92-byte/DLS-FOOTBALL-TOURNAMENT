@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1061438153155",
+    "firebase_url": "https://dls-football-tournament-default-rtdb.firebaseio.com",
+    "project_id": "dls-football-tournament",
+    "storage_bucket": "dls-football-tournament.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061438153155:android:610e92fbe689aa8ee15d76",
+        "android_client_info": {
+          "package_name": "dls.football.tournament.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061438153155-k9mgjlfhmgmkjh8d8ld1d235ri30a53e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAf6HNsTxKTuAtmowSfWQdLprPuIIvqUKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061438153155-k9mgjlfhmgmkjh8d8ld1d235ri30a53e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

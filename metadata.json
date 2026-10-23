@@ -1,0 +1,6 @@
+{
+  "name": "DLS Tournament",
+  "description": "Football Arena / DLS Tournament - সহজেই টুর্নামেন্টে যোগ দিন, খেলুন এবং জিতুন",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

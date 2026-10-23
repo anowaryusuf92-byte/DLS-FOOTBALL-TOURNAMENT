@@ -1,0 +1,159 @@
+{
+  "entities": {
+    "User": {
+      "collection": "users",
+      "fields": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "inGameId": { "type": "string" },
+        "teamName": { "type": "string" },
+        "photoUrl": { "type": "string" },
+        "role": { "type": "string", "enum": ["player", "admin", "super_admin"] },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      }
+    },
+    "Tournament": {
+      "collection": "tournaments",
+      "fields": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "gameType": { "type": "string" },
+        "entryFee": { "type": "number" },
+        "prizePool": { "type": "number" },
+        "startDate": { "type": "string" },
+        "totalSlots": { "type": "number" },
+        "registeredCount": { "type": "number" },
+        "status": { "type": "string", "enum": ["open", "ongoing", "completed"] },
+        "bannerUrl": { "type": "string" },
+        "rules": { "type": "string" },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      }
+    },
+    "Registration": {
+      "collection": "registrations",
+      "fields": {
+        "id": { "type": "string" },
+        "tournamentId": { "type": "string" },
+        "tournamentTitle": { "type": "string" },
+        "userId": { "type": "string" },
+        "playerName": { "type": "string" },
+        "phone": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "inGameId": { "type": "string" },
+        "teamName": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "senderPhone": { "type": "string" },
+        "transactionId": { "type": "string" },
+        "amount": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "registeredAt": { "type": "timestamp" },
+        "verifiedAt": { "type": "timestamp", "nullable": true },
+        "verifiedBy": { "type": "string", "nullable": true }
+      }
+    },
+    "Match": {
+      "collection": "matches",
+      "fields": {
+        "id": { "type": "string" },
+        "tournamentId": { "type": "string" },
+        "tournamentTitle": { "type": "string" },
+        "teamA": { "type": "string" },
+        "teamB": { "type": "string" },
+        "teamALogo": { "type": "string" },
+        "teamBLogo": { "type": "string" },
+        "scoreA": { "type": "number" },
+        "scoreB": { "type": "number" },
+        "matchDate": { "type": "string" },
+        "round": { "type": "string" },
+        "status": { "type": "string", "enum": ["upcoming", "live", "finished"] },
+        "winner": { "type": "string" },
+        "liveMinute": { "type": "string" },
+        "createdAt": { "type": "timestamp" },
+        "updatedAt": { "type": "timestamp" }
+      }
+    },
+    "Standing": {
+      "collection": "standings",
+      "fields": {
+        "id": { "type": "string" },
+        "tournamentId": { "type": "string" },
+        "teamName": { "type": "string" },
+        "played": { "type": "number" },
+        "won": { "type": "number" },
+        "drawn": { "type": "number" },
+        "lost": { "type": "number" },
+        "goalsFor": { "type": "number" },
+        "goalsAgainst": { "type": "number" },
+        "goalDifference": { "type": "number" },
+        "points": { "type": "number" }
+      }
+    },
+    "Scorer": {
+      "collection": "scorers",
+      "fields": {
+        "id": { "type": "string" },
+        "tournamentId": { "type": "string" },
+        "playerName": { "type": "string" },
+        "teamName": { "type": "string" },
+        "goals": { "type": "number" },
+        "matches": { "type": "number" }
+      }
+    },
+    "Payment": {
+      "collection": "payments",
+      "fields": {
+        "id": { "type": "string" },
+        "tournamentId": { "type": "string" },
+        "registrationId": { "type": "string" },
+        "userId": { "type": "string" },
+        "playerName": { "type": "string" },
+        "method": { "type": "string" },
+        "senderNumber": { "type": "string" },
+        "trxId": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string", "enum": ["entry_fee", "prize_distribution", "expense"] },
+        "status": { "type": "string", "enum": ["pending", "verified", "rejected"] },
+        "createdAt": { "type": "timestamp" }
+      }
+    },
+    "Notice": {
+      "collection": "notices",
+      "fields": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "category": { "type": "string" },
+        "isUrgent": { "type": "boolean" },
+        "authorName": { "type": "string" },
+        "createdAt": { "type": "timestamp" }
+      }
+    },
+    "Notification": {
+      "collection": "notifications",
+      "fields": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string" },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "timestamp" }
+      }
+    },
+    "AppConfig": {
+      "collection": "app_config",
+      "fields": {
+        "isAppActive": { "type": "boolean" },
+        "monthlyOfferTitle": { "type": "string" },
+        "monthlyOfferDetails": { "type": "string" },
+        "bonusAmount": { "type": "string" },
+        "noticeMessage": { "type": "string" }
+      }
+    }
+  }
+}
